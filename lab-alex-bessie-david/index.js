@@ -32,11 +32,11 @@ const bitmap = reader(`${__dirname}/data/palette-bitmap.bmp`, function(err,data)
     // bmp.gammagreen = data.readInt32LE(114);
     // bmp.gammablue = data.readInt32LE(118);
 
-    bmp.colortable = data.slice(54, bmp.offset).toString('hex').replace(/./gi,0);
+    data.slice(54, bmp.offset).toString('hex').replace(/./gi,0);
+    
+    console.log('new data color table:', data.toString('hex', 54, bmp.offset));
 
-    console.log('my current bitmap file: ', data);
-
-    fs.writeFile(`${__dirname}/data/newbitmap.bmp`, 'buffer', function(err, data){
+    fs.writeFile(`${__dirname}/data/newbitmap.bmp`, data, 'buffer', function(err,data){
         console.log('file created!');
     });
 });
