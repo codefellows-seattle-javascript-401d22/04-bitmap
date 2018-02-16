@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = function(array) {
+module.exports = function(bitmapObj) {
   let colorString = '';
   let colorPalette = '';
-  let numOfZeros = array.length * 8;
+  let numOfZeros = bitmapObj.pixelArray.length * 8;
 
 
 
