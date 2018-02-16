@@ -8,7 +8,8 @@ let bm = './data/palette-bitmap.bmp';
 // reader(bm,function(){
 // });
 
-writer(bm, 'new', 'hex', function(){
+writer(bm, 'new', function(){
+    
 });
 
 
