@@ -9,7 +9,7 @@ const constructor = module.exports = function(data) {
         this.height = data.readInt32LE(22);
         this.offset = data.readInt32LE(10);
         this.header = data.slice(0,54).toString('hex');
-        this.colorTable = data.slice(54, this.offset).toString('hex');
+        this.colorTable = data.slice(54, this.offset)
         this.pixels = data.slice(this.offset,this.offset + this.size).toString('hex');
         
     }
