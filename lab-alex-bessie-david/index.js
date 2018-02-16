@@ -4,7 +4,7 @@ const reader = require(`${__dirname}/lib/reader.js`);
 const transformer = require(`${__dirname}/lib/transformer.js`);
 const writer = require(`${__dirname}/lib/writer.js`);
 
-// node `${__dirname}/data/palette-bitmap.bmp` `${__dirname}/data/newpalettebitmap.bmp` 'blackout'
+// node index.js './data/palette-bitmap.bmp' './data/newpalettebitmap.bmp' 'blackout'
 reader(process.argv[2], function(err,data){
     let buff = transformer(data, process.argv[4]);
 
