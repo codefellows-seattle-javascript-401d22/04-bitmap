@@ -9,7 +9,9 @@ const bitMapWriter = module.exports = function(file, newBM, callback) {
     //let bitmap = constructor(fileBuffer);
     let newPath = `${__dirname}/../data/${newBM}.bmp`;
     
-    fs.writeFile(fileBuffer, newPath, function(err,data){
+    fs.writeFile(newPath, fileBuffer, function(err,data){
+        if(err) throw err;
+        console.log(data);
 
     });
 }
