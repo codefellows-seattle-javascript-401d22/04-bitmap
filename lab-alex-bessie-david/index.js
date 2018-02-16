@@ -10,6 +10,7 @@ reader(process.argv[2], function (err, data) {
 
   writer(process.argv[3], buff, function (err, data) {
     console.log('done!');
+    console.log('writer data:', data);
   });
 
 });
