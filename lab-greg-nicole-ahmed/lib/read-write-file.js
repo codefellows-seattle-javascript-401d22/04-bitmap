@@ -16,10 +16,11 @@ const readFileHelper = module.exports = function(file, newFile, callback) {
 
   fs.readFile(filePathRead, function(err, data){
     // if(err)
-    console.log('this is our file from the fileRead', data);
+    // console.log('this is our file from the fileRead', data);
     let bitMap = constructor(data);
-    console.log('this is our callback', callback);
+    // console.log('this is our callback', callback);
     let newBitmapObj = callback(bitMap);
+    // RECEIVES STRINGS!!! v v v 
     let newBitmapTotal = bitMap.header + newBitmapObj.colorPalette + newBitmapObj.colorString + bitMap.end;
     let newBitmap = Buffer.from(newBitmapTotal, 'hex');
     // console.log(newBitmap.toString('hex'));
