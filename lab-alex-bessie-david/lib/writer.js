@@ -7,4 +7,4 @@ const writer = module.exports = function (path, buff, callback) {
     if (err) return callback(err);
     return callback(null, data);
   });
-}
+};
