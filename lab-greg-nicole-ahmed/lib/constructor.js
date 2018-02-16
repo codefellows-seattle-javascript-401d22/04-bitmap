@@ -8,5 +8,7 @@ module.export = function(data) {
     this.pixelAddress = data.readInt32LE(10);
     this.pixels = data.toString('hex', this.pixelAddress, (this.pixelAddress + this.size));
     this.pixelArray = this.pixels.match((/.{1,8}/g));
+    this.header = data.slice(0, this.pixelAddress).toString('hex');
+    this.end = data.slice(this.pixelAddress + this.size, data.length).toString('hex');
   }
 }
