@@ -13,22 +13,3 @@ reader(process.argv[2], function(err,data){
     });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
