@@ -4,20 +4,41 @@ const fs = require('fs');
 const writer = require('./bitmap-writer.js');
 const constructor = require('./bitmap-constructor.js');
 
-const bitMapTransform = module.exports = function(data, callback) {
-  console.log('Color table data transform:', data);
+module.exports = exports = {};
 
+exports.blkToWhite = function(data) {
   for (let i = 0; i < data.length; i++) {
     if (data[i] === 0) {
       data[i] = 255;
     }
   }
-
-  console.log('Color table data post-transform:',data);
   return data;
 };
 
-    
-    
-    
-    
+exports.invert = function(data) {
+
+};
+
+exports.pixelExperiment = function(data) {
+  console.log(data);
+
+  for (let i = 0; i < data.length; i++) {
+    data[i * 2] = 0; // vertical lines
+    data[i * 3] = 1; // diagonal lines
+  }
+
+  for (let i = 2500; i > 0; i--) {
+    // data[i * 2] = 1; // vertical lines
+    // data[i * 3] = 20; // diagonal lines
+
+    // NOTE: you can combine these two:
+    data[i * 2] = 20; // vertical lines
+    // data[i * 3] = 1; // diagonal lines
+  }
+  
+  // turns everything black except one red slash
+  // for (let i = 0; i < data.length; i++) {
+  //   data[i] = data[i] * 3;
+  // }
+  return data;
+};
