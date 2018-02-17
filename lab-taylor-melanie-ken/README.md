@@ -1,5 +1,4 @@
 # Code Fellows 401 - Lab 04: Bitmap Transformer
-===
 
 ## Directory Structure
 * **README.md**
@@ -13,15 +12,23 @@
 * **data/** - contains original bitmap file
 * **\_\_test\_\_/** - contains unit tests
 
-## Minimum Requirements
-* The CLI should be architected using best modularization practices
-* The CLI should require at least three arguments `input-file-path output-file-path transfrom-name`
-* The CLI should support a minimum of three transforms
-* The CLI should log useful `Error` messages if used incorrectly
-* The CLI should log a success message on completion
-
 ## Installation
 
-## Dev Dependencies
+## CLI
+To use the Command Line Interface, the user must first type `node index.js` and enter three arguments:
+* The original bitmap file path, using the following structure. Ex: **./data/palette-bitmap.bmp**
+* The output file _name_ (not the entire path). Ex: **new**
+* The transform method name. See below for all transform meethods. Ex: invert
 
+Example:
+```
+node index.js ./data/palette-bitmap.bmp new greyscale
+```
 
+## Transform Methods
+* **blkToWhite** - All black values are changed to white.
+* **toLateEighties** - Changes the original bitmap to a rad combination of teals, pink, and purple.
+* **invert** - Simultaneously flips and mirrors the original file.
+* **diagonal** - Overlays vertical and diagonal stripes over the original image. 
+* **redAndBlack** - Transforms lower half of the original bitmap image to red and black values only.
+* **greyscale** - Transforms original bitmap to greyscale.
