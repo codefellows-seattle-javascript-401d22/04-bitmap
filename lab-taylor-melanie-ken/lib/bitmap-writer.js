@@ -12,14 +12,12 @@ const bitMapWriter = module.exports = function(file, newBM, callback) {
     if(err) return (err);
     
     let newBitMap = constructor(data);
-    transform(newBitMap.colorTable);
+    // transform.blkToWhite(newBitMap.colorTable);
 
+    transform.pixelExperiment(newBitMap.pixels);
+    
     fs.writeFile(newPath, data, function(err, data) {
       if(err) throw err;
     });
   });
 };
-    
-    
-    
-    
