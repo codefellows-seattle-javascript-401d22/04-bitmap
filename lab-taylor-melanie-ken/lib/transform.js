@@ -15,6 +15,15 @@ exports.blkToWhite = function(data) {
   return data;
 };
 
+exports.toLateEighties = function(data) {
+  for (let i = 0; i < data.colorTable.length; i++) {
+    if (i % 3 === 0) {
+      data.colorTable[i] = i - 102;
+    }
+  }
+  return data;
+};
+
 exports.invert = function(data) {
   data.pixels.reverse();
   return data;
