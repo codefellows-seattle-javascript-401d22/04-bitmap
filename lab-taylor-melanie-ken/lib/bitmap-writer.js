@@ -14,7 +14,7 @@ const bitMapWriter = module.exports = function(file, newBM, callback) {
     let newBitMap = constructor(data);
     // transform.blkToWhite(newBitMap.colorTable);
 
-    transform.pixelExperiment(newBitMap.pixels);
+    callback(newBitMap);
     
     fs.writeFile(newPath, data, function(err, data) {
       if(err) throw err;
