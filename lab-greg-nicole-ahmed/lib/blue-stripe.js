@@ -34,4 +34,5 @@ module.exports = function(bitmapObj){
     }
 
     return {colorString: bitmapObj.pixelArray.join(''), colorPalette: bitmapObj.colorPalette}
+
 }
