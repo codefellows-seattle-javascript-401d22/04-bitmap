@@ -1,22 +1,17 @@
 'use strict';
 
+const constructor = module.exports = function(data) {
+  function Bitmap(data) {
+    this.size = data.readInt32LE(2);
+    this.width = data.readInt32LE(18);
+    this.height = data.readInt32LE(22);
+    this.offset = data.readInt32LE(10);
+    this.header = data.slice(0,54).toString('hex');
+    this.colorTable = data.slice(54, this.offset);
+    // this.pixels = data.slice(this.offset,this.offset + this.size).toString('hex');
+    this.pixels = data.slice(this.offset,this.offset + this.size);
+  }
 
-
-module.exports = function(data) {
-    function Bitmap(data) {
-        this.size = data.readInt32LE(2);
-        this.width = data.readInt32LE(18);
-        this.height = data.readInt32LE(22);
-        this.offset = data.readInt32LE(10);
-        this.header = data.slice(0,54).toString('hex');
-        this.colorTable = data.slice(54, this.offset);
-        this.pixels = data.slice(this.offset,this.offset + this.size);
-        
-    }
-
-    console.log(this);
-    return new Bitmap(data);
-
-}
-
+  return new Bitmap(data);
+};
 
