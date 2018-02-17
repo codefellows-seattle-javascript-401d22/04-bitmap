@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 const constructor = module.exports = function(data) {
     function Bitmap(data) {
         this.size = data.readInt32LE(2);
@@ -11,7 +9,6 @@ const constructor = module.exports = function(data) {
         this.header = data.slice(0,54).toString('hex');
         this.colorTable = data.slice(54, this.offset)
         this.pixels = data.slice(this.offset,this.offset + this.size).toString('hex');
-        
     }
 
     return new Bitmap(data);

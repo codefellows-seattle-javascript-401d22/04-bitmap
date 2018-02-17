@@ -3,6 +3,8 @@
 const fs = require('fs');
 const reader = require('./bitmap-reader.js');
 const constructor = require('./bitmap-constructor.js');
+const transform = require('./transform.js');
+
 
 const bitMapWriter = module.exports = function(file, newBM, callback) {
     
@@ -10,23 +12,11 @@ const bitMapWriter = module.exports = function(file, newBM, callback) {
 
     fs.readFile(file, function(err,data) {
         if(err) return callback(err);
-
-        //console.log(data);
-        let fileBuffer = data;
-        // console.log(fileBuffer);
         
         let newBitMap = constructor(data);
-        // console.log(newBitMap);
-        console.log(newBitMap.colorTable);
+        transform(newBitMap.colorTable);
 
-        for (let i = 0; i < newBitMap.colorTable.length; i++) {
-            if (newBitMap.colorTable[i] !== 0) {
-                newBitMap.colorTable[i] = 39;
-            }
-        }
-        console.log(newBitMap.colorTable);
-
-        fs.writeFile(newPath, fileBuffer, function(err,data){
+        fs.writeFile(newPath, data, function(err,data){
             if(err) throw err;
         });
     });
