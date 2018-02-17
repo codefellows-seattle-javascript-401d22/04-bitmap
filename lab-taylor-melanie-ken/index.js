@@ -1,16 +1,20 @@
 'use strict';
 
-const reader = require('./lib/bitmap-reader.js');
+//const reader = require('./lib/bitmap-reader.js');
 const writer = require('./lib/bitmap-writer.js');
+//const constructor = require('./lib/bitmap-constructor.js');
 
-let bm = './data/palette-bitmap.bmp';
+let bm =`./data/palette-bitmap.bmp`;
+
 
 // reader(bm,function(){
 // });
 
 writer(bm, 'new', function(){
-    
 });
+    
+
+
 
 
 
