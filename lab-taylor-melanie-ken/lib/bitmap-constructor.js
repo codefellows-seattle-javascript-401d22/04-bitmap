@@ -1,6 +1,7 @@
 'use strict';
 
-const constructor = module.exports = function(data) {
+const constructor = module.exports = function(data, err) {
+  if(err) return err;
   function Bitmap(data) {
     this.size = data.readInt32LE(2);
     this.width = data.readInt32LE(18);
