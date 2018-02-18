@@ -1,8 +1,9 @@
 'use strict';
 
 const fs = require('fs');
-const writer = require('./bitmap-writer.js');
+const bitMapwriter = require('./bitmap-writer.js');
 const constructor = require('./bitmap-constructor.js');
+const transform = require('./transform.js');
 
 module.exports = exports = {};
 
