@@ -29,32 +29,35 @@ describe('File Reader/Writer Module', function() {
   });
 });
 
-// describe('Constructor Module', function() {
-//   describe(' ', function() {
-//     it(' ', function(done) {
-//       // assertions
-//       done();
-//     });
-//   });
-//   describe(' ', function() {
-//     it(' ', function(done) {
-//       //assertions
-//       done();
-//     });
-//   });
-// });
+describe('Constructor Module', function() {
+  describe(' ', function() {
+    it(' ', function(done) {
+      // assertions
+      done();
+    });
+  });
+  describe(' ', function() {
+    it(' ', function(done) {
+      //assertions
+      done();
+    });
+  });
+});
 
-// describe('Transform Module', function() {
-//   describe(' ', function() {
-//     it(' ', function(done) {
-//       // assertions
-//       done();
-//     });
-//   });
-//   describe(' ', function() {
-//     it(' ', function(done) {
-//       //assertions
-//       done();
-//     });
-//   });
-// });
+describe('Transform Module', function() {
+  describe('with an incorrect file type ', function() {
+    it('should throw an error', function(done) {
+      bitmapTransform.greyscale('string', function(err){
+        expect(err).toBeTruthy();
+      });
+      // assertions
+      done();
+    });
+  });
+  describe(' ', function() {
+    it(' ', function(done) {
+      //assertions
+      done();
+    });
+  });
+});

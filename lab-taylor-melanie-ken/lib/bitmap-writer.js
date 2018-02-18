@@ -30,6 +30,19 @@ const bitMapWriter = module.exports = function(file, newBM, transformMethod) {
     if (transformMethod === 'greyscale') {
       transform.greyscale(newBitMap);
     }
+    if (transformMethod === 'solid') {
+      transform.solid(newBitMap);
+    }
+    if (transformMethod === 'redscale') {
+      transform.redscale(newBitMap);
+    }
+    if (transformMethod === 'greenscale') {
+      transform.greenscale(newBitMap);
+    }
+    if (transformMethod === 'bluescale') {
+      transform.bluescale(newBitMap);
+    }
+
 
     fs.writeFile(newPath, data, function(err, data) {
       if(err) throw err;
