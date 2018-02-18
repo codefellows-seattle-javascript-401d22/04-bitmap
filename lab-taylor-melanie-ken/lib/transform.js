@@ -7,6 +7,7 @@ const constructor = require('./bitmap-constructor.js');
 module.exports = exports = {};
 
 exports.blkToWhite = function(data) {
+  console.log(typeof data);
   for (let i = 0; i < data.colorTable.length; i++) {
     if (data.colorTable[i] === 0) {
       data.colorTable[i] = 255;
@@ -54,9 +55,9 @@ exports.solid = function(data) {
   //   data.pixels[i] = 12;
   // }
 
-  for(let i = 0; i < data.pixels.length; i++) {
-    if(data.pixels[i]%3 === 0) {
-      data.pixels[i] = 9;
+  for(let i = 0; i < data.colorTable.length; i++) {
+    if(data.colorTable[i]%3 === 0) {
+      data.colorTable[i] = 9;
     }
   }
   return data;
@@ -67,6 +68,33 @@ exports.greyscale = function (data) {
     let avg = (data.colorTable[i] + data.colorTable[i+1] + data.colorTable[i+2]) / 3;
     data.colorTable[i] = avg;
     data.colorTable[i+1] = avg;
+    data.colorTable[i+2] = avg;
+  }
+}
+
+exports.bluescale = function (data) {
+  for(var i = 0; i < data.colorTable.length; i += 4) {
+    let avg = (data.colorTable[i] + data.colorTable[i+1] + data.colorTable[i+2]) / 3;
+    data.colorTable[i] = avg;
+    data.colorTable[i+1] = 0;
+    data.colorTable[i+2] = 0;
+  }
+}
+
+exports.greenscale = function (data) {
+  for(var i = 0; i < data.colorTable.length; i += 4) {
+    let avg = (data.colorTable[i] + data.colorTable[i+1] + data.colorTable[i+2]) / 3;
+    data.colorTable[i] = 0;
+    data.colorTable[i+1] = avg;
+    data.colorTable[i+2] = 0;
+  }
+}
+
+exports.redscale = function (data) {
+  for(var i = 0; i < data.colorTable.length; i += 4) {
+    let avg = (data.colorTable[i] + data.colorTable[i+1] + data.colorTable[i+2]) / 3;
+    data.colorTable[i] = 0;
+    data.colorTable[i+1] = 0;
     data.colorTable[i+2] = avg;
   }
 }

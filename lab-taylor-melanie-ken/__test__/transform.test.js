@@ -30,6 +30,7 @@ describe('File Reader/Writer Module', function() {
 });
 
 describe('Constructor Module', function() {
+
   describe('with an improper file path', function() {
     it('should return an error', function(done) {
       // assertions
@@ -48,12 +49,14 @@ describe('Constructor Module', function() {
         expect(err).toBe(null);
         expect(typeof data).toBe('data');
       });
+
       done();
     });
   });
 });
 
 describe('Transform Module', function() {
+
   describe('with an improper file path', function() {
     it('should return an error', function(done) {
       // assertions
@@ -72,6 +75,7 @@ describe('Transform Module', function() {
         expect(err).toBe(null);
         expect(typeof data).toBe('data');
       });
+
       done();
     });
   });
