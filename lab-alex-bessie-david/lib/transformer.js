@@ -56,4 +56,6 @@ const transformer = module.exports = function(buff, transformType){
             console.log(buff.length);
             return buff;
     }
-}
+    return buff;
+  }
+};
