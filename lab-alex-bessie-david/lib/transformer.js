@@ -1,6 +1,6 @@
 'use strict';
 
-const transformer = module.exports = function(buff, transformType){
+module.exports = function(buff, transformType){
   switch(transformType){
   case 'blackout':
     var start = buff.readInt32LE(14) + 14;
@@ -10,7 +10,7 @@ const transformer = module.exports = function(buff, transformType){
     }
     return buff;
   case 'invert':
-    var start = buff.readInt32LE(10);
+    start = buff.readInt32LE(10);
     console.log('file size:', buff.readInt32LE(2));
     console.log('start:', start);
     var end = start + buff.readInt32LE(34);
@@ -28,8 +28,8 @@ const transformer = module.exports = function(buff, transformType){
     console.log('buffend', buff);
     return buff;
   case 'grayscale':
-    var start = buff.readInt32LE(14) + 14;
-    var offset = buff.readInt32LE(10);
+    start = buff.readInt32LE(14) + 14;
+    offset = buff.readInt32LE(10);
     var colors = buff.toString('hex', start, offset).match(/.{8}/g);
     console.log('beforecolors', colors.length);
     // Looking at the below stack overflow helped me figure out hex to decimal
@@ -43,7 +43,7 @@ const transformer = module.exports = function(buff, transformType){
 
       var gray = Math.floor((+red * 0.21) + (+green * 0.72) + (+blue * 0.07));
       gray = gray.toString(16);
-      if(gray.length === 1){ gray = '0' + gray};
+      if(gray.length === 1){ gray = '0' + gray;}
       var ans = gray + gray + gray + '01';
       return ans;
     });
