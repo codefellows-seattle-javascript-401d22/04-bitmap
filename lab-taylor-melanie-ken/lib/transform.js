@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const writer = require('./bitmap-writer.js');
+const bitMapwriter = require('./bitmap-writer.js');
 const constructor = require('./bitmap-constructor.js');
 
 module.exports = exports = {};
@@ -25,7 +25,8 @@ exports.toLateEighties = function(data) {
   return data;
 };
 
-exports.invert = function(data) {
+exports.invert = function(err, data) {
+  if(err) return err;
   data.pixels.reverse();
   return data;
 };
