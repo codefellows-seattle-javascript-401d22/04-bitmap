@@ -6,7 +6,7 @@ const constructor = require('./bitmap-constructor.js');
 
 module.exports = exports = {};
 
-exports.blkToWhite = function(err,data) {
+exports.blkToWhite = function(data,err) {
   console.log(typeof data);
   if(err) return err;
   for (let i = 0; i < data.colorTable.length; i++) {
@@ -17,7 +17,7 @@ exports.blkToWhite = function(err,data) {
   return data;
 };
 
-exports.toLateEighties = function(err,data) {
+exports.toLateEighties = function(data, err) {
   if(err) return err;
   for (let i = 0; i < data.colorTable.length; i++) {
     if (i % 3 === 0) {
@@ -27,13 +27,13 @@ exports.toLateEighties = function(err,data) {
   return data;
 };
 
-exports.invert = function(err, data) {
+exports.invert = function(data, err) {
   if(err) return err;
   data.pixels.reverse();
   return data;
 };
 
-exports.diagonal = function(err, data) {
+exports.diagonal = function(data, err) {
   if(err) return err;
   for (let i = 0; i < data.pixels.length; i++) {
     data.pixels[i * 2] = 1;
@@ -46,7 +46,7 @@ exports.diagonal = function(err, data) {
   return data;
 };
 
-exports.redAndBlack = function(err,data) {
+exports.redAndBlack = function(data, err) {
   if(err) return err;
   for (let i = 0; i < data.pixels.length/2; i++) {
     data.pixels[i] = data.pixels[i] * 3;
@@ -54,11 +54,11 @@ exports.redAndBlack = function(err,data) {
   return data;
 };
 
-exports.solid = function(data) {
+exports.solid = function(data, err) {
   // for(let i = 0; i < data.pixels.length/2; i++) {
   //   data.pixels[i] = 12;
   // }
-
+  if(err) return err;
   for(let i = 0; i < data.colorTable.length; i++) {
     if(data.colorTable[i]%3 === 0) {
       data.colorTable[i] = 9;
@@ -67,7 +67,7 @@ exports.solid = function(data) {
   return data;
 };
 
-exports.greyscale = function (err, data) {
+exports.greyscale = function (data,err) {
   if(err) return err;
   for(var i = 0; i < data.colorTable.length; i += 4) {
     let avg = (data.colorTable[i] + data.colorTable[i+1] + data.colorTable[i+2]) / 3;
@@ -77,7 +77,8 @@ exports.greyscale = function (err, data) {
   }
 };
 
-exports.bluescale = function (data) {
+exports.bluescale = function (data,err) {
+  if(err)return err;
   for(var i = 0; i < data.colorTable.length; i += 4) {
     let avg = (data.colorTable[i] + data.colorTable[i+1] + data.colorTable[i+2]) / 3;
     data.colorTable[i] = avg;
@@ -86,7 +87,8 @@ exports.bluescale = function (data) {
   }
 };
 
-exports.greenscale = function (data) {
+exports.greenscale = function (data, err) {
+  if(err) return err;
   for(var i = 0; i < data.colorTable.length; i += 4) {
     let avg = (data.colorTable[i] + data.colorTable[i+1] + data.colorTable[i+2]) / 3;
     data.colorTable[i] = 0;
@@ -95,7 +97,8 @@ exports.greenscale = function (data) {
   }
 };
 
-exports.redscale = function (data) {
+exports.redscale = function (data, err) {
+  if(err) return err;
   for(var i = 0; i < data.colorTable.length; i += 4) {
     let avg = (data.colorTable[i] + data.colorTable[i+1] + data.colorTable[i+2]) / 3;
     data.colorTable[i] = 0;
