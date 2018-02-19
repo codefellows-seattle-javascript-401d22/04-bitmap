@@ -65,7 +65,7 @@ exports.solid = function(data) {
     }
   }
   return data;
-}
+};
 
 exports.greyscale = function (err, data) {
   if(err) return err;
@@ -75,7 +75,7 @@ exports.greyscale = function (err, data) {
     data.colorTable[i+1] = avg;
     data.colorTable[i+2] = avg;
   }
-}
+};
 
 exports.bluescale = function (data) {
   for(var i = 0; i < data.colorTable.length; i += 4) {
@@ -84,7 +84,7 @@ exports.bluescale = function (data) {
     data.colorTable[i+1] = 0;
     data.colorTable[i+2] = 0;
   }
-}
+};
 
 exports.greenscale = function (data) {
   for(var i = 0; i < data.colorTable.length; i += 4) {
@@ -93,7 +93,7 @@ exports.greenscale = function (data) {
     data.colorTable[i+1] = avg;
     data.colorTable[i+2] = 0;
   }
-}
+};
 
 exports.redscale = function (data) {
   for(var i = 0; i < data.colorTable.length; i += 4) {
@@ -102,4 +102,4 @@ exports.redscale = function (data) {
     data.colorTable[i+1] = 0;
     data.colorTable[i+2] = avg;
   }
-}
+};

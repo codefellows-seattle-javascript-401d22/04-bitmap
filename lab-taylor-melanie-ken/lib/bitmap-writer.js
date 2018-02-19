@@ -43,9 +43,8 @@ const bitMapWriter = module.exports = function(file, newBM, transformMethod) {
       transform.bluescale(newBitMap);
     }
 
-
     fs.writeFile(newPath, data, function(err, data) {
-      if(err) throw err;
+      if(err) return err;
       console.log(`File ${newBM}.bmp created with ${transformMethod} transform method.`);
     });
   });
