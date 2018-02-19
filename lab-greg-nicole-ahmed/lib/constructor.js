@@ -10,9 +10,7 @@ module.exports = function(data) {
     this.header = data.slice(0, 54).toString('hex');
     this.colorPalette = data.toString('hex', 54, this.pixelAddress);
     this.colorPaletteArray = this.colorPalette.match((/.{1,8}/g));
-    //console.log('colorPalette:', this.colorPaletteArray);
     this.pixelArray = this.pixels.match((/.{1,2}/g));
-    //console.log('colorPalette:', this.pixelArray);
     this.end = data.slice(this.pixelAddress + this.size, data.length).toString('hex');
   }
 
