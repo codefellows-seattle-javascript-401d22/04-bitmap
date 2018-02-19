@@ -1,6 +1,10 @@
 'use strict';
 
 const transformer = module.exports = function(buff, transformType){
+  if(!Buffer.isBuffer(buff)) throw new Error('not a buffer');
+  var transformTypes = ['blackout', 'invert', 'grayscale', 'invcolors'];
+  if(!transformTypes.includes(transformType)) throw new Error('transform type not supported');
+  
   switch(transformType){
   case 'blackout':
     var start = buff.readInt32LE(14) + 14;
