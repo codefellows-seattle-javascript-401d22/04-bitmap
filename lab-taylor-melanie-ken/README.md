@@ -37,6 +37,9 @@ node index.js ./data/palette-bitmap.bmp new greyscale
 * **diagonal** - Overlays vertical and diagonal stripes over the original image. 
 * **redAndBlack** - Transforms lower half of the original bitmap image to red and black values only.
 * **greyscale** - Transforms original bitmap to greyscale.
+* **bluescale** - Transforms original bitmap to bluescale.
+* **greenscale** - Transforms original bitmap to greenscale.
+* **redscale** - Transforms original bitmap to redscale.
 
 ## Contributors
 Taylor Stemple, Melanie Cohen, and Ken Unterseher
