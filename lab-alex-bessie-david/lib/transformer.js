@@ -55,6 +55,36 @@ module.exports = function(buff, transformType){
     buff = Buffer.from(buff, 'hex');
     console.log(buff.length);
     return buff;
+ 
+  case 'invcolors':
+    start = buff.readInt32LE(14) + 14;
+    offset = buff.readInt32LE(10);
+    var colors = buff.toString('hex', start, offset).match(/.{8}/g);
+    console.log('beforecolors', colors.length);
+    var invcolors = colors.map(color => {
+      var blue = '0x' + color.slice(0, 2);
+      var green = '0x' + color.slice(2, 4);
+      var red = '0x' + color.slice(4, 6);
+
+      blue = Math.floor(255 - +blue).toString(16);
+      green = Math.floor(255 - +green).toString(16);
+      red = Math.floor(255 - +red).toString(16);
+
+      if (red.length === 1) { red = '0' + red; }
+      if (green.length === 1) { green = '0' + green; }
+      if (blue.length === 1) { blue = '0' + blue; }
+
+      var ans = blue + green + red + '01';
+      return ans;
+    });
+    console.log('aftercolors:', invcolors);
+    invcolors = invcolors.join('');
+    console.log('invcolors.length:', invcolors.length);
+    buff = buff.toString('hex', 0, start) + invcolors + buff.toString('hex', offset, buff.readInt32LE(2));
+    console.log(buff.length);
+    buff = Buffer.from(buff, 'hex');
+    console.log(buff.length);
+    return buff;
   }
   return buff;
 };
