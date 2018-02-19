@@ -1,0 +1,4 @@
+function (err) {
+        expect(err).toBeTruthy();
+        expect(err.code).toEqual('ENOENT');
+      }

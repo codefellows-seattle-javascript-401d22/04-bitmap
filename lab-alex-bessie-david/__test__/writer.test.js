@@ -10,8 +10,8 @@ describe('Writer Module', function() {
       // writer(`${__dirname}/badfilename.txt`, function(err){
       //   expect(err).toBeTruthy();
       //   expect(err.code).toEqual('ENOENT');
-        done();
-      });
+      // });
+      done();
     });
   });
   describe('with proper incoming file path', function(){
@@ -21,8 +21,7 @@ describe('Writer Module', function() {
       //   expect(Buffer.isBuffer(data)).toBeTruthy();
       //   expect(data.toString('utf-8', 0, 2)).toBe('BM');
       //   expect(data.readINT32LE(10)).toBe(11078);
-        done();
-      });
+      done();
     });
   });
 });
