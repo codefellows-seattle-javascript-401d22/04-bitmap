@@ -9,10 +9,8 @@ const constructor = module.exports = function(data, err) {
     this.offset = data.readInt32LE(10);
     this.header = data.slice(0,54).toString('hex');
     this.colorTable = data.slice(54, this.offset);
-    // this.pixels = data.slice(this.offset,this.offset + this.size).toString('hex');
     this.pixels = data.slice(this.offset,this.offset + this.size);
   }
-
   return new Bitmap(data);
 };
 
