@@ -6,7 +6,7 @@ module.exports = function(bitmapObj) {
   let numOfZeros = bitmapObj.pixelArray.length * 8;
 
   for(var i = 0; i < numOfZeros; i++) {
-    colorString += 'f';
+    colorString += '0';
   }
 
   for(var j = 0; j < bitmapObj.colorPalette.length; j++) {
