@@ -80,8 +80,8 @@ exports.greyscale = function (data,err) {
     data.colorTable[i+1] = avg;
     data.colorTable[i+2] = avg;
   }
-  console.log(data.colorTable.slice(0,10));
 };
+  
 
 exports.bluescale = function (data,err) {
   if(err)return err;
