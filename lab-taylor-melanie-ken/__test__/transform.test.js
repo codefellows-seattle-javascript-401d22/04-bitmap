@@ -71,7 +71,8 @@ describe('Transform Module', function() {
       it('should return the content of the file', function(done) {
         transform.invert(bitMap, function(err, data) {
           expect(err).toBe(null);
-          expect(typeof data).toBe('data');
+          expect(typeof data).toBe('object');
+          expect(data.pixels.slice(0,10)).toEqual('<Buffer 16 16 00 00 16 00 00 16 00 16>');
         });
         done();
       });
@@ -92,7 +93,8 @@ describe('Transform Module', function() {
       it('should return the content of the file', function(done) {
         transform.diagonal(bitMap, function(err, data) {
           expect(err).toBe(null);
-          expect(typeof data).toBe('data');
+          expect(typeof data).toBe('object');
+          expect(data.pixels.slice(0,10)).toEqual('<Buffer 00 00 14 01 14 1c 01 1c 14 01>');
         });
         done();
       });
@@ -113,7 +115,8 @@ describe('Transform Module', function() {
       it('should return the content of the file', function(done) {
         transform.toLateEighties(bitMap, function(err, data) {
           expect(err).toBe(null);
-          expect(typeof data).toBe('data');
+          expect(typeof data).toBe('object');
+          expect(data.colorTable.slice(0,10)).toEqual('<Buffer 9a 00 00 9d 34 20 a0 00 3c a3>');
         });
         done();
       });
@@ -134,7 +137,8 @@ describe('Transform Module', function() {
       it('should return the content of the file', function(done) {
         transform.blkToWhite(bitMap, function(err, data) {
           expect(err).toBe(null);
-          expect(typeof data).toBe('data');
+          expect(typeof data).toBe('object');
+          expect(data.colorTable.slice(0,10).toEqual('<Buffer ff ff ff ff 34 20 22 ff 3c 28>'));
         });
         done();
       });
@@ -155,7 +159,8 @@ describe('Transform Module', function() {
       it('should return the content of the file', function(done) {
         transform.greyscale(bitMap, function(err, data) {
           expect(err).toBe(null);
-          expect(typeof data).toBe('data');
+          expect(typeof data).toBe('object');
+          expect(data.colorTable.slice(0,10).toEqual('<Buffer 00 00 00 00 27 27 27 00 38 38>'));
         });
         done();
       });
@@ -176,7 +181,8 @@ describe('Transform Module', function() {
       it('should return the content of the file', function(done) {
         transform.redAndBlack(bitMap, function(err, data) {
           expect(err).toBe(null);
-          expect(typeof data).toBe('data');
+          expect(typeof data).toBe('object');
+          expect(data.pixels.slice(0,10).toEqual('<Buffer 54 00 54 54 00 54 54 54 54 54>'));
         });
         done();
       });

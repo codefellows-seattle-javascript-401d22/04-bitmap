@@ -16,6 +16,7 @@ exports.blkToWhite = function(data,err) {
   }
   return data;
 };
+  
 
 exports.toLateEighties = function(data, err) {
   if(err) return err;
@@ -26,10 +27,12 @@ exports.toLateEighties = function(data, err) {
   }
   return data;
 };
+  
 
 exports.invert = function(data, err) {
   if(err) return err;
   data.pixels.reverse();
+  
   return data;
 };
 
@@ -45,12 +48,14 @@ exports.diagonal = function(data, err) {
   }
   return data;
 };
+  
 
 exports.redAndBlack = function(data, err) {
   if(err) return err;
   for (let i = 0; i < data.pixels.length/2; i++) {
     data.pixels[i] = data.pixels[i] * 3;
   }
+  console.log(data.pixels.slice(0,10));
   return data;
 };
 
@@ -76,6 +81,7 @@ exports.greyscale = function (data,err) {
     data.colorTable[i+2] = avg;
   }
 };
+  
 
 exports.bluescale = function (data,err) {
   if(err)return err;
