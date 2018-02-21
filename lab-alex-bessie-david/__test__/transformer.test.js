@@ -13,42 +13,57 @@ describe('Transformer Module', function() {
     });
   });
   describe('if passed proper buffer', () => {
-    beforeAll((done) => {
-      this.originalbuff = fs.readFile(`${__dirname}/test-data/palette-bitmap.bmp`, function(err, data){
-        if(err) console.error(err);
-        return data;
+    describe('#notsupported', () => {
+      it('should throw an error', (done) => {
+        fs.readFile(`${__dirname}/test-data/palette-bitmap.bmp`, function(err, data){
+          expect(() => transformer(data,'notsupported')).toThrow('transform type not supported');
+          done();
+        });
       });
-      this.blackoutbuff = fs.readFile(`${__dirname}/test-data/blackout.bmp`, function(err, data){
-        if(err) console.error(err);
-        return data;
-      });
-      this.invertbuff = fs.readFile(`${__dirname}/test-data/invert.bmp`, function(err, data){
-        if(err) console.error(err);
-        return data;
-      });
-      this.grayscalebuff = fs.readFile(`${__dirname}/test-data/grayscale.bmp`, function(err, data){
-        if(err) console.error(err);
-        return data;
-      });
-      // var invcolorsbuff = fs.readFile(`${__dirname}/test-data/invcolors.bmp`, function(err, data){
-      //   if(err) console.error(err);
-      //   return data;
-      // });
-      done();
     });
-    // describe('#blackout', () => {
-    //   it('should return a blackout bitmap buffer', (done) => {
-    //     expect(() => transformer(this.originalbuff, 'blackout')).toBe(this.blackoutbuff);
-    //     done();
-    //   });
-    //   it('should return an invert bitmap buffer', (done) => {
-    //     expect(testinvertbuff).toEqual(invertbuff);
-    //     done();
-    //   });
-    //   it('should return a grayscale bitmap buffer', (done) => {
-    //     expect(testgrayscalebuff).toEqual(grayscalebuff);
-    //     done();
-    //   });
-    // });
+    describe('#blackout', () => {
+      it('should return a blackout bitmap buffer', (done) => {
+        fs.readFile(`${__dirname}/test-data/palette-bitmap.bmp`, function(err, data){
+          fs.readFile(`${__dirname}/test-data/blackout.bmp`, function(err, data2){
+            let blackout = transformer(data, 'blackout');
+            expect(blackout).toEqual(data2);
+            done();
+          });
+        });
+      });
+    });
+    describe('#invert', () => {
+      it('should return a invert bitmap buffer', (done) => {
+        fs.readFile(`${__dirname}/test-data/palette-bitmap.bmp`, function(err, data){
+          fs.readFile(`${__dirname}/test-data/invert.bmp`, function(err, data2){
+            let invert = transformer(data, 'invert');
+            expect(invert).toEqual(data2);
+            done();
+          });
+        });
+      });
+    });
+    describe('#grayscale', () => {
+      it('should return a grayscale bitmap buffer', (done) => {
+        fs.readFile(`${__dirname}/test-data/palette-bitmap.bmp`, function(err, data){
+          fs.readFile(`${__dirname}/test-data/grayscale.bmp`, function(err, data2){
+            let grayscale = transformer(data, 'grayscale');
+            expect(grayscale).toEqual(data2);
+            done();
+          });
+        });
+      });
+    });
+    describe('#invcolors', () => {
+      it('should return a invcolors bitmap buffer', (done) => {
+        fs.readFile(`${__dirname}/test-data/palette-bitmap.bmp`, function(err, data){
+          fs.readFile(`${__dirname}/test-data/invcolors.bmp`, function(err, data2){
+            let invcolors = transformer(data, 'invcolors');
+            expect(invcolors).toEqual(data2);
+            done();
+          });
+        });
+      });
+    });
   });
 });
