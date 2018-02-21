@@ -7,24 +7,20 @@ const transformer = module.exports = function(buff, transformType){
   
   switch(transformType){
   case 'blackout':
-  var start = buff.readInt32LE(14) + 14;
-  var offset = buff.readInt32LE(10);
-  var colors = buff.toString('hex', start, offset).match(/.{8}/g);
-  var blackcolors = colors.map(color => {
-    var blue = '0x' + color.slice(0,2);
-    var green = '0x' + color.slice(2,4);
-    var red = '0x' + color.slice(4,6);
-
-    var black = 0;
-    black = black.toString(16);
-    if(black.length === 1){ black = '0' + black;}
-    var ans = black + black + black + '01';
-    return ans;
-  });
-  blackcolors = blackcolors.join('');
-  buff = buff.toString('hex', 0, start) + blackcolors + buff.toString('hex', offset, buff.readInt32LE(2));
-  buff = Buffer.from(buff, 'hex');
-  return buff;
+    var start = buff.readInt32LE(14) + 14;
+    var offset = buff.readInt32LE(10);
+    var colors = buff.toString('hex', start, offset).match(/.{8}/g);
+    var blackcolors = colors.map(() => {
+      var black = 0;
+      black = black.toString(16);
+      if(black.length === 1){ black = '0' + black;}
+      var ans = black + black + black + '01';
+      return ans;
+    });
+    blackcolors = blackcolors.join('');
+    buff = buff.toString('hex', 0, start) + blackcolors + buff.toString('hex', offset, buff.readInt32LE(2));
+    buff = Buffer.from(buff, 'hex');
+    return buff;
   case 'invert':
     start = buff.readInt32LE(10);
     var end = start + buff.readInt32LE(34);
@@ -38,7 +34,7 @@ const transformer = module.exports = function(buff, transformType){
   case 'grayscale':
     start = buff.readInt32LE(14) + 14;
     offset = buff.readInt32LE(10);
-    var colors = buff.toString('hex', start, offset).match(/.{8}/g);
+    colors = buff.toString('hex', start, offset).match(/.{8}/g);
     var graycolors = colors.map(color => {
       var blue = '0x' + color.slice(0,2);
       var green = '0x' + color.slice(2,4);
@@ -58,7 +54,7 @@ const transformer = module.exports = function(buff, transformType){
   case 'invcolors':
     start = buff.readInt32LE(14) + 14;
     offset = buff.readInt32LE(10);
-    var colors = buff.toString('hex', start, offset).match(/.{8}/g);
+    colors = buff.toString('hex', start, offset).match(/.{8}/g);
     var invcolors = colors.map(color => {
       var blue = '0x' + color.slice(0, 2);
       var green = '0x' + color.slice(2, 4);
