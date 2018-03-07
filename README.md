@@ -1,72 +1,43 @@
-![CF](https://camo.githubusercontent.com/70edab54bba80edb7493cad3135e9606781cbb6b/687474703a2f2f692e696d6775722e636f6d2f377635415363382e706e67) Lab 04: Bitmap Transformer
-===
+# Bitmap CLI Application
 
-## Submission Instructions
-* Work in a fork of this repository
-* Work in a branch on your fork
-* Write all of your code in a directory named `lab-` + `<your name>` **e.g.** `lab-susan`
-* Open a pull request to this repository
-* Submit on canvas a question and observation, how long you spent, and a link to your pull request
+Code Fellows 401 Advanced Software Development
 
-## Resources
-* [bitmap wiki](https://en.wikipedia.org/wiki/BMP_file_format)
-* [buffer docs](https://nodejs.org/api/buffer.html)
+Bitmap Transformer Assignment, February 2018
 
-## Configuration
-Configure the root of your repository with the following files and directories. Thoughtfully name and organize any additional configuration or module files.
-* **README.md** - contains documentation
-* **.gitignore** - contains a [robust](http://gitignore.io) `.gitignore` file
-* **.eslintrc** - contains the course linter configuratoin
-* **.eslintignore** - contains the course linter ignore configuration
-* **package.json** - contains npm package config
-  * create a `lint` script for running eslint
-  * create a `test` script for running tests
-* **lib/** - contains module definitions
-* **\_\_test\_\_/data/** - contains bitmaps for testing
-* **\_\_test\_\_/** - contains unit tests
+This application can help perform a few basic image processing transformations on bitmap files (.bmp) with color depths of 8 or 24 bits and have a header field of 'BM'. Accepted bitmaps may have any width or height although smaller sized bitmaps are recommended for faster processing, there is a 100px by 100px sample image provided in the project.
 
-## Feature Tasks
-For this assignment, you will be building a bitmap (`.bmp`) transformer CLI. It will read a bitmap in from disk, run one or more color or raster transforms and then write it out to a new file. This project will require the use of node buffers in order to manipulate binary data. Your solution should be composed of small tested modules that solve specific problems. Your modules should be thoughtfully named and well documented. The entry point to your CLI should be an `index.js` file in the root of your application, and all helper modules should be placed in the lib/ directory. Your bitmap transformer modules should not use any third party libraries.
+###Installation & Getting Started:
+  - Fork and or clone a copy of this repo and CD into the root file.
+  - Run a NPM i -S (optional - dependencies we installed during the dev process).
+  - Now that you have CD'd into the project and are at the root file you are able to run your transformations from your command line (see below for examples).
 
-##### Minimum Requirements
-* The CLI should be architected using best modularization practices
-* The CLI should require at least three arguments `input-file-path output-file-path transfrom-name`
-* The CLI should support a minimum of three transforms
-* The CLI should log useful `Error` messages if used incorrectly
-* The CLI should log a success message on completion
+###Basic Commands:
+  - node index.js [originalBitmapFile] [transformedBitmapFile] [transformation]
+  - node index.js palette-bitmap.bmp ihm-palette-bitmap.bmp invertedhorizontalmirror
+  - The above command will take the palette-bitmap.bmp file perform a 'invertedhorizontalmirror' transformation on it and create a new file named ihm-palette-bitmap.bmp 
 
-## Testing
-* Use `describe` and `it` methods to define descriptive tests and increase readability
-* Each `it` callback should aim to test a small, well defined, feature of a function
-* Write tests to ensure that each function behaves correctly with valid and invalid inputs
-* **Note:** The CLI should be tested without using `child_process` or any equivalent third party libraries
+Note: The [originalBitmapFile] must be located in the assets folder, this is where all of your transformation files will be written to as well. Also, please include .bmp when creating your new file's name.
 
-##  Documentation
-In your `README.md`, describe the exported values of each module you have defined. Every function description should include it's airty (expected number of parameters), the expected data for each parameter (data-type and limitations), and it's behavior (for both valid and invalid use). Feel free to write any additional information in your `README.md` that you deem relavent.
+###Commands & Transformations Explained:
+  - invert - inverts the bitmap's pixel array.
+  - greyscale - modifies the bitmap's color table by converting the R, G and B value of each color to an average of the 3; thus converting the bitmap to greyscale.
+  - redscale - modifies the bitmap's color table by converting the G value of each color's RGB to 0; thus converting the bitmap to redscale.
+  - bluescale - modifies the bitmap's color table by converting the B value of each color's RGB to 0; thus converting the bitmap to bluescale.
+  - greenscale - modifies the bitmap's color table by converting the R value of each color's RGB to 0; thus converting the bitmap to greenscale.
+  - whitereplace - modifies the bitmap's color table by replacing all instances of white with black.
+  - blackreplace - modifies the bitmap's color table by replacing all instances of black with white.
+  - verticalmirror - modifies the second hald of bitmap's pixel array by duplicating the top half.
+  - verticalmirrorinverted - modifies the second half of the bitmap's pixel array by duplicating the inverse of the top half.
+  - horizontalmirror - modifies the second half of each line inside the bitmap's pixel array by duplicating the left half of the same line.
+  - horizontalmirrorinverted - modifies the second half of each line inside the bitmap's pixel array by duplicating the inverse of the left half of the same line.
 
-###### Tips
-You will want to define a strategy for solving the problem before you begin to code. Once you have a strategy defined, you can break it into steps that can be split into helper modules. Each helper module should solve a small specific problem. The main module should utilize the helper modules to execute your original stratagy.
+Note: There are 11 separate transformations, feel free to playaround with all of them and to chain multiple transformations on top each other. ex. node index.js palette-bitmap.bmp ihm-palette-bitmap.bmp invertedhorizontalmirror greyscale
 
-###### Example Strategy
-0. Gather user input (infile, outfile, and transform)
-0. Read the input bitmap file using the `fs` module
-0. Parse the bitmap's buffer into an object representing a bitmap (using a constructor)
-0. Using metadata from the parsed bitmap object, run a transform on the buffer directly (mutate the color or raster data)
-0. Write the mutated buffer to the output file path
+###Technical Overview:
+Our project is made up of 3 separate modules that live inside the lib folder(read,transform and write), the contents of which of which are exported. This project was an exercise in asynchronous callbacks, TDD (Test Driven Development), project organization and modularity among other things.
 
-###### Transfrom Ideas
-* Color Pallet Transforms
-  * Invert
-  * Randomize
-  * Black and White
-  * Darken or Lighten
-  * Add or Mutiply a Hue
-  * Add or Subtract Contrast
+The file-reader.js module has an airity of 2 with expected inputs of a file path and a callback. The output is a buffer object, if there is a valid input of a (file path and function). If the parameter type/types are wrong or there is not 2 parameters an error will be thrown.
 
-* Raster Data Transforms
-  * Pixilate
-  * Add a Border
-  * Add a Watermark
-  * Vertically or Horizontally Flip
-  * Vertically or Horizontally Mirror
-  * Vertically or Horizontally Stretch
+The file-transformer.js module has an airity of 3 with expected inputs of a buffer object, an array of transformations and a callback function. The output is an hexidecimally encoded buffer object that is ready to be written to a file, if there are valid inputs of an (buffer object, array of transformations and a callback function). If the parameter type/types are wrong or there is not 3 parameters an error will be thrown.
+
+The file-writer.js module has an airity of 3 with expected inputs of an hexidecimally encoded buffer object, a file path string and a callback function. The expected result in a newly written file and a success message in your terminal, if there are valid inputs of an (hexidecimally encoded buffer object, a file path string and a callback function). If the parameter type/types are wrong or there is not 3 parameters an error will be thrown.
